@@ -3,8 +3,7 @@ import requests
 
 from celery import current_app as celery_app
 
-import html_parser
-import content_validator
+import page_validator
 
 _log = logging.getLogger(__name__)
 
@@ -33,7 +32,7 @@ def get_website_content(url):
         if response.status_code != 200:
             response_info["reason"] = response.reason
         else:
-            response_info["html_content"] = response.content
+            response_info["html_content"] = response.text
 
         response_info["status"] = response.status_code
 
@@ -48,8 +47,12 @@ def check_content(response_info, requirements, url):
     """
     content_ok = False
     if response_info["status"] == 200:
-        html_txt = html_parser.parse(response_info["html_content"])
-        content_ok = content_validator.check(html_txt, requirements)
+        # we could do a simple substring check on the html content
+        # but then we would be looking also in the document's comments,
+        # scripts and css - we only want the strings mentioned in
+        # requierements to be present in the raw text
+        content_ok = page_validator.check_page(
+                response_info["html_content"], requirements["url"])
 
     result = {
         "url": url,
