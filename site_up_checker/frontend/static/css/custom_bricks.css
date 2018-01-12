@@ -1,0 +1,20 @@
+.brick.large {
+    width: 250px;
+    height: 250px;
+}
+
+.brick.large.site-up {
+    background: #00c08d;
+}
+.brick.large.site-down {
+    background: #f44336;
+}
+
+.brick.large.site-incorrect {
+    background: #fae03c;
+}
+
+.gridly {
+    position: relative;
+    width: 960px;
+}

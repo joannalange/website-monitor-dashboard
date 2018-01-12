@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+    website checker
+{% endblock %}
+
+{% block content %}
+    <section class="example">
+    <div class="gridly">
+        <div id="website1" class="brick large site-down"></div>
+        <div class="brick large site-up"></div>
+        <div class="brick large site-incorrect"></div>
+        <div class="brick large site-up"></div>
+    </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+    // start gridly
+    $('.gridly').gridly({
+        base: 60, // px
+        gutter: 20, // px
+        columns: 16
+    });
+$(document).ready(function() {
+    $.getJSON(
+        "{{ url_for('siteup.run_checks') }}", function (data2) {
+            console.debug("status: " + data2["status"]);
+            console.debug("shit.");
+        });
+});
+    </script>
+{% endblock %}

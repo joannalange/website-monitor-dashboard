@@ -1,0 +1,29 @@
+version: "2"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-web
+    environment:
+      - SITE_UP_CHECKER_SETTINGS=/usr/src/app/dev_settings.py
+    command: watchmedo auto-restart -d /usr/src/app -p "*.py" -D -R -- gunicorn -k gevent -b 0.0.0.0:8070 site_up_checker.application:app
+    depends_on:
+      - redis
+    ports:
+      - "8070:8070"
+    volumes:
+      - ".:/usr/src/app"
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile-celery
+    environment:
+      - SITE_UP_CHECKER_SETTINGS=/usr/src/app/dev_settings.py
+    command: watchmedo auto-restart -d /usr/src/app -p "*.py" -D -R -- celery -A site_up_checker.application:celery worker -B -n site_up_checker.%h
+    volumes:
+      - ".:/usr/src/app"
+  redis:
+    image: redis
+  rabbitmq:
+    image: rabbitmq
