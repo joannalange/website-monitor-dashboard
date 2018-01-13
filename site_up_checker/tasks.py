@@ -36,7 +36,6 @@ def get_website_content(url):
 
         response_info["status"] = response.status_code
         response_info["response_time"] = response.elapsed.total_seconds()
-    _log.info("task get content result: %s", response_info)
     return response_info
 
 

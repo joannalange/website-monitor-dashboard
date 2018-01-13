@@ -9,6 +9,11 @@
 .brick.large.site-up {
     background: #00c08d;
 }
+
+.brick.large.site-default {
+    background: #cccccc;
+}
+
 .brick.large.site-down {
     background: #f44336;
 }
