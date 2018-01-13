@@ -23,6 +23,7 @@
         columns: 16
     });
 $(document).ready(function() {
+    var websites = 
     $.getJSON(
         "{{ url_for('siteup.run_checks') }}", function (data2) {
             console.debug("status: " + data2["status"]);
