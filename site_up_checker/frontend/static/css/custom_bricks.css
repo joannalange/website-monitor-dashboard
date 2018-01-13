@@ -1,6 +1,7 @@
 .brick.large {
     width: 250px;
     height: 250px;
+    color: #4C4C4C;
 }
 
 .brick.large.site-up {
@@ -17,4 +18,24 @@
 .gridly {
     position: relative;
     width: 960px;
+}
+
+.brick-hr {
+    color: #4C4C4C;
+    border-color: #4C4C4C;
+}
+
+.panel-transparent {
+    background: rgba(46, 51, 56, 0.2)!important;
+    border:none;
+    vertical-align: middle;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    margin:auto;
+}
+
+.panel-heading-transparent {
+    background: rgba(46, 51, 56, 0.2)!important;
+
 }

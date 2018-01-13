@@ -1,5 +1,3 @@
-
-
 function buildGrid(websites_list, container, document)  {
     // iterate over all websites and add a brick div for each of them
     for (var i = 0; i < websites_list.length; i++) {
