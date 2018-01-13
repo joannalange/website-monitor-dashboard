@@ -21,7 +21,7 @@ def get_website_content(url):
             "reason": message (error or 'reason') when a request doesn't succeed
         }
     """
-    response_info = {"status": None, "html_content": "", "reason": ""}
+    response_info = {"status": None, "html_content": "", "reason": "", "response_time": None}
 
     try:
         response = requests.get(url)
@@ -35,6 +35,7 @@ def get_website_content(url):
             response_info["html_content"] = response.text
 
         response_info["status"] = response.status_code
+        response_info["response_time"] = response.elapsed.total_seconds()
     _log.info("task get content result: %s", response_info)
     return response_info
 
