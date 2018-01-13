@@ -1,0 +1,6 @@
+1. [FRONTEND] Implement updateBricks
+2. [BACKEND] Implement logging response_info to file
+3. [FRONTEND] Add another interval to run_checks every X ms
+4. [BACKEND] Add an endpoint to download the log file
+4. [FRONTEND] Add a button to download the log file
+5. [FRONTEND] Improve layout: make a header, make bricks nicer, add favicon.ico, etc. 
