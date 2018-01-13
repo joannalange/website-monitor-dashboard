@@ -60,7 +60,8 @@ def check_content(response_info, requirements, url):
         "url": url,
         "is_up": response_info["status"] == 200,
         "content_ok": content_ok,
-        "reason": response_info["reason"]
+        "reason": response_info["reason"],
+        "response_time": response_info["response_time"]
     }
 
     return result

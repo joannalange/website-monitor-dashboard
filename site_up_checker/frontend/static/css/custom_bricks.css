@@ -1,6 +1,9 @@
 .brick.large {
     width: 250px;
     height: 250px;
+    color: #4C4C4C;
+    align-items: center;
+    display: inline-flex;
 }
 
 .brick.large.site-up {
