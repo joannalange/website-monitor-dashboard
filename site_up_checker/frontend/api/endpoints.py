@@ -37,6 +37,8 @@ def get_result(job_id):
     """
     _log.info("Getting results")
 
+    from site_up_checker.tasks import process_results
+
     result = process_results.AsyncResult(job_id).get()
     response = {'result': result}
     return jsonify(response)
@@ -47,8 +49,7 @@ def run_checks():
     """
     :return: The job id
     """
-    settings = {"websites": [{"url": "someurl", "requirements": "dummyreq"}]}
-    workflow = CheckWorkflow(settings)
+    workflow = CheckWorkflow()
     job_id = workflow()
     _log.info("Running checks, job_id: %s", job_id)
     return jsonify({'id': job_id}), 202

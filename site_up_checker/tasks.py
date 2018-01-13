@@ -35,7 +35,7 @@ def get_website_content(url):
             response_info["html_content"] = response.text
 
         response_info["status"] = response.status_code
-
+    _log.info("task get content result: %s", response_info)
     return response_info
 
 
@@ -45,6 +45,7 @@ def check_content(response_info, requirements, url):
     If the status code of the response was 200 checks if the
     website's content meets the given requierements
     """
+    _log.info("Checking content of: %s", url)
     content_ok = False
     if response_info["status"] == 200:
         # we could do a simple substring check on the html content
@@ -52,7 +53,7 @@ def check_content(response_info, requirements, url):
         # scripts and css - we only want the strings mentioned in
         # requierements to be present in the raw text
         content_ok = page_validator.check_page(
-                response_info["html_content"], requirements["url"])
+                response_info["html_content"], requirements)
 
     result = {
         "url": url,
