@@ -25,8 +25,8 @@ def get_website_content(url):
 
     try:
         response = requests.get(url)
-    except requests.exceptions.ConnectionError as e:
-        # url not found
+    except RuntimeError as e:
+        # request raised an error
         response_info["reason"] = e.message
     else:
         if response.status_code != 200:
@@ -35,7 +35,11 @@ def get_website_content(url):
             response_info["html_content"] = response.text
 
         response_info["status"] = response.status_code
-        response_info["response_time"] = response.elapsed.total_seconds()
+
+        response_time = response.elapsed.total_seconds()
+        if isinstance(response_time, float):
+            # round it to 4th decimal
+            response_info["response_time"] = ("%.4f" % response_time)
     return response_info
 
 
@@ -67,11 +71,12 @@ def check_content(response_info, requirements, url):
 
 
 @celery_app.task
-def process_results(results):
+def process_results(results, last_checked):
     """
     Combines results from multiple websites
 
     :param results: a list of results (dictionaries) from multiple check_content tasks
+    :param last_checked: date and time of when the last (this) check was ran
     :return: dictionary:
         {
             "url1": check_result dict,
@@ -79,9 +84,10 @@ def process_results(results):
         }
     """
     _log.info("Processing results")
-    final_results = {}
+
+    final_results = {"websites": {}, "last_checked": last_checked}
 
     for website in results:
-        final_results[website["url"]] = website
+        final_results["websites"][website["url"]] = website
 
     return final_results

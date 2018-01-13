@@ -1,5 +1,7 @@
 import logging
 from celery import chain, group
+from datetime import datetime
+from time import time
 
 from site_up_checker.validation_config import REQUIREMENTS
 
@@ -16,6 +18,12 @@ class CheckWorkflow(object):
         # will analyze it
         _log.info("Creating workflow")
 
+        # current time in seconds
+        current_time = time()
+        # format time to e.g. '2018-01-01 12:30:30 UTC'
+        last_checked = datetime.utcfromtimestamp(current_time).strftime(
+                '%Y-%m-%d %H:%M:%S UTC')
+
         for url_i, requirements_i in REQUIREMENTS.iteritems():
             # requirements for the website content, e.g. it must contain a
             # certain string
@@ -28,7 +36,7 @@ class CheckWorkflow(object):
             tasks.append(single_website_tasks)
 
         # create a tasks group so that checks are ran simultaneously
-        workflow = chain(group(tasks), process_results.s())
+        workflow = chain(group(tasks), process_results.s(last_checked))
 
         # run job
         job = workflow()

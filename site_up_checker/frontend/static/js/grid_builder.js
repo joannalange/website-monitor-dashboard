@@ -95,6 +95,7 @@ function buildBrick(website_name, document) {
     panel_body.classList.add("panel-body-custom");
 
     // create a list containing default website data
+    // for now all elements are hidden
     var website_data_list = document.createElement("ul");
     website_data_list.style.listStyleType = "none";
     website_data_list.style.paddingLeft = "0";
@@ -121,15 +122,6 @@ function buildBrick(website_name, document) {
     panel_body.append(website_data_list);
     // create a panel body and add it to the panel div
     panel.append(panel_body);
-    /*
-    var panel_footer = document.createElement("div");
-    panel_footer.classList.add("panel-footer");
-    panel_footer.id = "lastchecked_" + website_name;
-    panel_footer.classList.add("panel-footer-custom");
-    panel_footer.innerText = "LAST CHECKED: ";
-    panel.append(panel_footer);
-    */
-
 
     // add the ready panel to the brick
     brick.append(panel);

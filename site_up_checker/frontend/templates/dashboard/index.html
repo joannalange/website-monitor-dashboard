@@ -10,7 +10,7 @@
                 <h3>WEBSITE MONITOR</h3>
                 <hr>
                 <button type="button" class="btn btn-primary">Download log file</button>
-                &nbsp;&nbsp;<div id="lastchecked" style="float: right;display: inline-flex;font-weight: bold;">LAST CHECKED: 12:07</div>
+                &nbsp;&nbsp;<div id="lastchecked" style="float: right; display:none; font-weight: bold;">LAST CHECKED: 12:07</div>
                 <br>
                 <br>
                 <div id="gridlydashboard" class="gridly">
@@ -45,7 +45,6 @@
             });
 
             var sample_period = {{ sample_period }};
-
             $.getJSON(
                 "{{ url_for('siteup.run_checks') }}", function (data) {
                     var job_id = data["id"];
@@ -67,7 +66,12 @@
                                 clearInterval(inner_intervalId);
                                 // job succeeded, get results and update bricks accordingly
                                 $.getJSON(results_url, function (results) {
-                                    updateBricks(results["result"], document);
+                                    updateBricks(results["result"]["websites"], document);
+
+                                    // update last checked time
+                                    var last_checked = "LAST CHECKED: " + results["result"]["last_checked"];
+                                    document.getElementById("lastchecked").style.display = "inline-flex";
+                                    document.getElementById("lastchecked").innerText = last_checked;
                                 });
                             } else if (data["status"] === "FAILURE") {
                                 clearInterval(inner_intervalId);
