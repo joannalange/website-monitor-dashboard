@@ -5,7 +5,17 @@
 
 {% block content %}
     <section class="example">
-        <div id="gridlydashboard" class="gridly">
+        <div class="container-fluid" style="margin:20px;">
+            <div class="jumbotron" style="overflow-y:scroll;">
+                <h3>WEBSITE MONITOR</h3>
+                <hr>
+                <button type="button" class="btn btn-primary">Download log file</button>
+                &nbsp;&nbsp;<div id="lastchecked" style="float: right;display: inline-flex;font-weight: bold;">LAST CHECKED: 12:07</div>
+                <br>
+                <br>
+                <div id="gridlydashboard" class="gridly">
+                </div>
+            </.div>
         </div>
     </section>
 {% endblock %}
@@ -26,10 +36,11 @@
 
             var dashboard = document.getElementById("gridlydashboard");
             buildGrid(websites, dashboard, document);
+
             // start gridly
             $('.gridly').gridly({
                 base: 60, // px
-                gutter: 20, // px
+                gutter: 10, // px
                 columns: 16
             });
 

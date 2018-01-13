@@ -81,16 +81,15 @@ function buildBrick(website_name, document) {
     var panel = document.createElement("div");
     panel.classList.add("panel");
     panel.classList.add("panel-default");
-    panel.classList.add("panel-transparent");
+    panel.classList.add("panel-custom");
 
     // create a panel heading and add it to the panel div
     var panel_heading = document.createElement("div");
     panel_heading.classList.add("panel-heading");
-    panel_heading.classList.add("panel-heading-transparent");
-    panel_heading.innerText = website_name;
+    panel_heading.classList.add("panel-heading-custom");
+    panel_heading.innerHTML = "<b>" + website_name + "</b>";
     panel.append(panel_heading);
 
-    // create a panel body and add it to the panel div
     var panel_body = document.createElement("div");
     panel_body.classList.add("panel-body");
     panel_body.classList.add("panel-body-custom");
@@ -120,7 +119,17 @@ function buildBrick(website_name, document) {
     website_data_list.append(reason);
 
     panel_body.append(website_data_list);
+    // create a panel body and add it to the panel div
     panel.append(panel_body);
+    /*
+    var panel_footer = document.createElement("div");
+    panel_footer.classList.add("panel-footer");
+    panel_footer.id = "lastchecked_" + website_name;
+    panel_footer.classList.add("panel-footer-custom");
+    panel_footer.innerText = "LAST CHECKED: ";
+    panel.append(panel_footer);
+    */
+
 
     // add the ready panel to the brick
     brick.append(panel);
