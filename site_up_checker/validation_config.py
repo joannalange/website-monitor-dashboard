@@ -10,6 +10,9 @@ REQUIREMENTS = {
     "http://google.com/blabla": ["dummy"],
     # site down
     "http://goooogle.com/": ["dummy"],
+
+    "http://bbc.com/news": ["news"],
+    "http://facebook.com/": ["facebook"],
 }
 
 # determines how often wbesites are being checked, value in seconds, only

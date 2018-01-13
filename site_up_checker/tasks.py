@@ -24,13 +24,13 @@ def get_website_content(url):
     response_info = {"status": None, "html_content": "", "reason": "", "response_time": None}
 
     try:
-        response = requests.get(url)
-    except RuntimeError as e:
+        response = requests.get(url, timeout=3)
+    except BaseException as e:
         # request raised an error
-        response_info["reason"] = e.message
+        response_info["reason"] = str(e.message)
     else:
         if response.status_code != 200:
-            response_info["reason"] = response.reason
+            response_info["reason"] = str(response.reason)
         else:
             response_info["html_content"] = response.text
 
@@ -40,6 +40,7 @@ def get_website_content(url):
         if isinstance(response_time, float):
             # round it to 4th decimal
             response_info["response_time"] = ("%.4f" % response_time)
+    _log.info("returning: #%s#", response_info)
     return response_info
 
 

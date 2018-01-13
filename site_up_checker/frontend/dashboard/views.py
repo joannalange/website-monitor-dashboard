@@ -1,7 +1,7 @@
 import json
 import logging
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, send_file
 
 from site_up_checker.validation_config import REQUIREMENTS, SAMPLE_PERIOD
 
@@ -17,3 +17,8 @@ def index():
 
     return render_template('dashboard/index.html',
                            urls=website_urls, sample_period=SAMPLE_PERIOD)
+
+
+@bp.route("/favicon.ico", methods=['GET'])
+def favicon():
+    return send_file('favicon.ico')
