@@ -93,10 +93,12 @@ function buildBrick(website_name, document) {
     // create a panel body and add it to the panel div
     var panel_body = document.createElement("div");
     panel_body.classList.add("panel-body");
+    panel_body.classList.add("panel-body-custom");
 
     // create a list containing default website data
     var website_data_list = document.createElement("ul");
     website_data_list.style.listStyleType = "none";
+    website_data_list.style.paddingLeft = "0";
 
     var status = document.createElement("li");
     status.innerHTML = "<b>status:</b> OK";
