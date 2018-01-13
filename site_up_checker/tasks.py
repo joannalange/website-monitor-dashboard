@@ -71,10 +71,6 @@ def process_results(results):
     """
     Combines results from multiple websites
 
-    Main reason for creating this task is to check in celery if the
-    job is finished - if this task is finished that means all other
-    tasks must have completed
-
     :param results: a list of results (dictionaries) from multiple check_content tasks
     :return: dictionary:
         {

@@ -1,0 +1,4 @@
+1. Implement updateBricks
+2. Implement logging response_info to file
+3. Add a button to download the log file
+4. Improve layout: make a header, make bricks nicer, add favicon.ico, etc. 
