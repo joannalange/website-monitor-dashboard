@@ -1,0 +1,16 @@
+
+.panel-transparent {
+    background: rgba(46, 51, 56, 0.2)!important;
+    border:none;
+    vertical-align: middle;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    margin:auto;
+}
+
+.panel-heading-transparent {
+    background: rgba(46, 51, 56, 0.2)!important;
+    border:none;
+
+}
