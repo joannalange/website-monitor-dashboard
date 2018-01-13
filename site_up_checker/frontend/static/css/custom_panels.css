@@ -1,5 +1,4 @@
-
-.panel-transparent {
+.panel-custom {
     background: rgba(46, 51, 56, 0.2)!important;
     border:none;
     vertical-align: middle;
@@ -9,7 +8,7 @@
     margin:auto;
 }
 
-.panel-heading-transparent {
+.panel-heading-custom {
     background: rgba(46, 51, 56, 0.2)!important;
     border:none;
 
