@@ -28,23 +28,7 @@
             var new_url = base_url.substring(0, base_url.length - 1);
             return new_url + string_to_add;
         }
-
-        $(document).ready(function() {
-
-            // Dashboard setup - create a brick for each website and start gridly
-            var websites = {{ urls|safe }};
-
-            var dashboard = document.getElementById("gridlydashboard");
-            buildGrid(websites, dashboard, document);
-
-            // start gridly
-            $('.gridly').gridly({
-                base: 60, // px
-                gutter: 10, // px
-                columns: 16
-            });
-
-            var sample_period = {{ sample_period }};
+        function runCheck() {
             $.getJSON(
                 "{{ url_for('siteup.run_checks') }}", function (data) {
                     var job_id = data["id"];
@@ -75,12 +59,33 @@
                                 });
                             } else if (data["status"] === "FAILURE") {
                                 clearInterval(inner_intervalId);
-                        console.debug("FAILURE");
-                    }
-                    // else: PENDING, need to wait more
+                                console.debug("FAILURE");
+                            }
+                            // else: PENDING, need to wait more
+                        });
+                    }, 200);
                 });
-            }, 200);
+        }
+        $(document).ready(function() {
+
+            // Dashboard setup - create a brick for each website and start gridly
+            var websites = {{ urls|safe }};
+
+            var dashboard = document.getElementById("gridlydashboard");
+            buildGrid(websites, dashboard, document);
+
+            // start gridly
+            $('.gridly').gridly({
+                base: 60, // px
+                gutter: 10, // px
+                columns: 16
+            });
+
+            runCheck();
+            var sample_period = {{ sample_period }};
+            setInterval(function () {
+                runCheck();
+            }, sample_period * 1000);
         });
-});
     </script>
 {% endblock %}

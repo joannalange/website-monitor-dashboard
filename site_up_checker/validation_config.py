@@ -17,4 +17,4 @@ REQUIREMENTS = {
 
 # determines how often wbesites are being checked, value in seconds, only
 # integers allowed
-SAMPLE_PERIOD = 10
+SAMPLE_PERIOD = 3
