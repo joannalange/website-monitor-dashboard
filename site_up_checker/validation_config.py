@@ -15,6 +15,5 @@ REQUIREMENTS = {
     "http://facebook.com/": ["facebook"],
 }
 
-# determines how often wbesites are being checked, value in seconds, only
-# integers allowed
-SAMPLE_PERIOD = 3
+# determines how often websites are being checked, value in seconds
+SAMPLE_PERIOD = 60

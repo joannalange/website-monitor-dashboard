@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-    website checker
+    website monitor
 {% endblock %}
 
 {% block content %}
@@ -63,7 +63,7 @@
                             }
                             // else: PENDING, need to wait more
                         });
-                    }, 200);
+                    }, 1000);
                 });
         }
         $(document).ready(function() {

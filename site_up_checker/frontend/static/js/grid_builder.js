@@ -17,8 +17,13 @@ function updateBricks(results, document) {
         // update reason
         var reason = results[website_name]["reason"];
         var reason_li = document.getElementById("reason_" + website_name);
-        if (reason !== "") {
-            reason_li.innerHTML = "<b>reason: </b> " + reason;
+
+        if (reason.length >= 30) {
+            // if error message is long make the font smaller
+            reason_li.innerHTML = "<b>error: </b> <span style='font-size:x-small'>" + reason + "</span>";
+        } else if (reason !== "") {
+            reason_li.innerHTML = "<b>error: </b> " + reason;
+
         }
 
         var status = "UP";
@@ -101,13 +106,11 @@ function buildBrick(website_name, document) {
     website_data_list.style.paddingLeft = "0";
 
     var status = document.createElement("li");
-    status.innerHTML = "<b>status:</b> OK";
     status.id = "status_" + website_name;
     status.style.display = "none";
     website_data_list.append(status);
 
     var response_time = document.createElement("li");
-    response_time.innerHTML = "<b>response time:</b> 0 ms";
     response_time.id = "time_" + website_name;
     response_time.style.display = "none";
     website_data_list.append(response_time);
