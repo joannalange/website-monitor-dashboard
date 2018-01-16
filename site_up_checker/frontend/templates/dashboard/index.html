@@ -9,7 +9,9 @@
             <div class="jumbotron" style="overflow-y:scroll;">
                 <h3>WEBSITE MONITOR</h3>
                 <hr>
-                <button type="button" class="btn btn-primary">Download log file</button>
+                <button id="download_log_button" type="button" class="btn btn-primary"
+                                                               download="website_monitor.log">Download log file</button>
+
                 &nbsp;&nbsp;<div id="lastchecked" style="float: right; display:none; font-weight: bold;">LAST CHECKED: 12:07</div>
                 <br>
                 <br>
@@ -67,6 +69,14 @@
                 });
         }
         $(document).ready(function() {
+
+            // setup the download button
+            var logfile_path = "{{ url_for("dashboard.download_log") }}";
+            var log_button = document.getElementById("download_log_button");
+                console.debug(log_button);
+            log_button.addEventListener("click", function() {
+                location.href= logfile_path;
+            });
 
             // Dashboard setup - create a brick for each website and start gridly
             var websites = {{ urls|safe }};

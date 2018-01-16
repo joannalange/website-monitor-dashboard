@@ -14,3 +14,5 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 CELERYD_CONCURRENCY = 8
 CELERYD_NODES = 3
+
+LOGFILE_PATH = "/var/log/website_monitor.log"
