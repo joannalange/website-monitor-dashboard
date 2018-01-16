@@ -1,8 +1,4 @@
-import logging
-
 from BeautifulSoup import BeautifulSoup
-
-_log = logging.getLogger(__name__)
 
 
 def get_raw_text_from_html(html_doc):
@@ -20,7 +16,6 @@ def get_raw_text_from_html(html_doc):
     # getText called with a " " because otherwise
     # all spaces are removed
     raw_text = b_soup.find('html').getText(" ")
-    _log.info("raw text:\n%s", raw_text)
 
     return raw_text
 
