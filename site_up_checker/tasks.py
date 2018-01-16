@@ -7,6 +7,11 @@ import page_validator
 
 _log = logging.getLogger(__name__)
 
+# setup file logger
+_file_log = logging.getLogger(__name__ + ".filelogger")
+file_handler = logging.FileHandler('/var/log/website_monitor.log')
+_file_log.addHandler(file_handler)
+
 
 @celery_app.task
 def get_website_content(url):
@@ -91,4 +96,28 @@ def process_results(results, last_checked):
     for website in results:
         final_results["websites"][website["url"]] = website
 
+    log_results(final_results)
+
     return final_results
+
+
+def log_results(final_results):
+    """
+    Log results to file
+    """
+    _file_log.info("Check performed: %s", final_results["last_checked"])
+
+    # iterate through websites and log the check results
+    for url, website_data in final_results["websites"].iteritems():
+        up_or_down = "UP" if website_data["is_up"] else "DOWN"
+        log_msg = "url: {}; status: {};".format(url, up_or_down)
+
+        if website_data["is_up"]:
+            # if up log if content correct and the response time
+            log_msg += " correct content: {}; response time: {};".format(
+                website_data["content_ok"], website_data["response_time"])
+        else:
+            # if down log the error
+            log_msg += " error: {}".format(website_data["reason"])
+
+        _file_log.info(log_msg)
