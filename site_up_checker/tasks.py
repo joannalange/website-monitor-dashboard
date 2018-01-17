@@ -21,7 +21,8 @@ def get_website_content(url):
             "reason": message (error or 'reason') when a request doesn't succeed
         }
     """
-    response_info = {"status": None, "html_content": "", "reason": "", "response_time": None}
+    response_info = {"status": None, "html_content": "", "reason": "",
+                     "response_time": None}
 
     try:
         response = requests.get(url, timeout=3)
